@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.store',
     'apps.content',
     'user',
+    'apps.shopping_cart',
 
 ]
 

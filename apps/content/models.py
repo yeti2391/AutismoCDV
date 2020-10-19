@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 #se importa la siguiente señal para mejorar el tema de slugs en course y video
 #tambien es necesario el pre_save:
@@ -15,8 +16,8 @@ class Course(models.Model):
     publish_date = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
     description = models.TextField()
-    #author = models.ForeignKey(User, on_delete=models.CASCADE)
-    #precio me va a faltar tmb
+    price = models.FloatField()
+    #author = models.ForeignKey(settings.AUTH_USER_MODEL, default=request.user.username, on_delete=models.CASCADE)
 
 
     def __str__(self):
