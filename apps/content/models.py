@@ -17,7 +17,7 @@ class Course(models.Model):
     last_update = models.DateTimeField(auto_now=True)
     description = models.TextField()
     price = models.FloatField()
-    #author = models.ForeignKey(settings.AUTH_USER_MODEL, default=request.user.username, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 
     def __str__(self):
