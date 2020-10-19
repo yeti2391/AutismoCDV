@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Servicios{% endblock %}
+
+{% block content %}
+
+<section class="page-section about-heading">
+  <div class="container">
+    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'img/servicios.jpg' %}" alt="">
+    <div class="about-heading-content">
+      <div class="row">
+        <div class="col-xl-9 col-lg-10 mx-auto">
+          <div class="bg-faded rounded p-5">
+            <h2 class="section-heading-upper mb-4 text-center"><u>Servicios</u></h2>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 mx-auto" style="border-right: solid;">
+                  <h4 class="section-heading-lower">Asesoramiento:</h4>
+                  <p>A través de una pequeña suscripción mensual ofrecemos asesoramiento e información sobre el Autismo y su marco normativo en nuestro país</p>
+
+                </div>
+
+                <div class="col-xl-6 col-lg-6 mx-auto">
+                  <h4 class="section-heading-lower">Línea telfonica </h4>
+                  <p>Si estás necesitando ser escuchado ofrecemos una línea telefonica, recuerda:</p>
+                  <p>¡Siempre es mejor caminar acompañado! </p>
+                  <h5><strong>Teléfono:</strong> 096843570</h5>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

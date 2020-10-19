@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Borrar Post{% endblock %}
+
+{% block content %}
+
+<section class="page-section clearfix">
+  <div class="container">
+    <div class="intro">
+      <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'img/fracaso.jpg' %}" alt="">
+      <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+        <h2 class="section-heading mb-4">
+          <span class="section-heading-upper">Delete</span>
+
+              <span class="section-heading-lower"><p>Seguro quieres borrar este post?</p></span>
+
+              <form class="" method="post">
+                {% csrf_token %}
+                <button class="btn btn-primary" type="submit" name="button">Sí estoy seguro</button>
+              </form>
+
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

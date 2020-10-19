@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block content %}
+
+<section class="page-section clearfix">
+  <div class="container">
+    <div class="intro">
+      <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'img/exito.webp' %}" alt="">
+      <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+        <h2 class="section-heading mb-4">
+          <span class="section-heading-upper">Email enviado correctamente</span>
+          <span class="section-heading-lower">Gracias por comunicarte</span>
+        </h2>
+        <p class="mb-3">A la brevedad nos estaremos comunicando con usted.
+        </p>
+        <div class="intro-button mx-auto">
+          <a class="btn btn-primary btn-xl" href="{% url 'core_app:inicio' %}">Página Principal</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

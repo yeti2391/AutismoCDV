@@ -1,0 +1,84 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Usuario{% endblock %}
+
+{% block content %}
+
+<!-- Mensaje -->
+<section class="page-section cta">
+  <div class="container">
+
+
+      <div class="row">
+
+        <div class="col-xl-3 col-lg-3 mx-auto">
+          <div class="bg-faded rounded p-5" style="color: #1C5B7A; ">
+            <p><a href="{% url 'core_app:inicio' %}"><button class="btn btn-primary btn-block py-2" type="button" name="button">Inicio</button></a></p>
+            <h2 class="section-heading mb-4">
+              <span class="section-heading-upper">Perfil de {{request.user}}</span>
+            </h2>
+            <img class="img-thumbnail" src="{{request.user.profile.thumbnail.url}}" alt="" width='300'>
+          </div>
+        </div>
+
+
+
+      <!-- IDEA: ACÁ TERMINA CONTACTO Y EN LA MISMA ROW PONGO VISITANOS -->
+
+      <div class="col-xl-9 col-lg- mx-auto">
+        <div class="bg-faded rounded p-5" style="color: #1C5B7A; ">
+          <h2 class="section-heading mb-4">
+            <span class="section-heading-upper">Datos Personales</span>
+          </h2>
+          <form class="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" name="Update Information" class='btn btn-primary' value="Actualizar">
+          </form>
+        </div>
+      </div>
+      <!-- IDEA: ACA TERMINA VISITANOS Y LA ROW EN EL DIV SIGUIENTE-->
+        </div>
+  </div>
+</section>
+
+
+{% endblock %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="car card-body">
+          <a href="{% url 'core_app:inicio' %}" class="btn btn-primary">Volver al Inicio</a>
+          <hr>
+          <h3>Perfil de {{request.user}}</h3>
+          <hr>
+          <img class="img-thumbnail" src="{{request.user.profile.thumbnail.url}}" alt="" width='300'>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="card card-body">
+        <form class="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <input type="submit" name="Update Information" class='btn btn-primary' value="Actualizar">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{{ form|crispy }}
+
+para chequear si el usuario es un Customer o Admin:
+{% if request.user.is_staff %}
+
+
+{% endif %}

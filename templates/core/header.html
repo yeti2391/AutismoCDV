@@ -1,0 +1,82 @@
+
+{% load static %}
+<!-- IDEA:
+<div class="banner" style="width: 100%; text-align:center;">
+<div class="banner-content">
+  <img src="{% static 'img/bannerautismo.png' %}" class="img-fluid" alt="Responsive image">
+</div>
+</div>
+ -->
+
+
+<h1 class="site-heading text-center text-white d-none d-lg-block">
+  <span class="site-heading-upper text-primary mb-3">
+    <blockquote class="blockquote">
+      <p class="mb-0">"Amar es esencialmente entregarse a los demás"</p>
+      <footer class="blockquote-footer" style="color: #21a315"><cite title="Source Title text-right">Juan Pablo II</cite></footer>
+    </blockquote>
+  </span>
+  <span class="site-heading-lower"><em><strong>Autismo Camino de Vida</strong></em></span>
+</h1>
+
+
+<!-- Navegación -->
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="{% url 'core_app:inicio' %}">Autismo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item px-lg-4">
+          <a class="nav-link text-uppercase text-expanded" href="{% url 'core_app:inicio' %}">Inicio</a>
+        </li>
+        <li class="nav-item px-lg-4">
+          <a class="nav-link text-uppercase text-expanded" href="{% url 'servicios_app:servicios' %}">Servicios</a>
+        </li>
+        <li class="nav-item px-lg-4">
+          <a class="nav-link text-uppercase text-expanded" href="{% url 'contacto_app:contacto' %}">Únetenos</a>
+        </li>
+        <li class="nav-item px-lg-4">
+          <a class="nav-link text-uppercase text-expanded" href="{% url 'blog_app:list' %}">Blog</a>
+        </li>
+        <li class="nav-item px-lg-4">
+          <a class="nav-link text-uppercase text-expanded" href="{% url 'content_app:course-list' %}">Cursos</a>
+        </li>
+        <li class="nav-item px-lg-4">
+          <a class="nav-link text-uppercase text-expanded" href="{% url 'store_app:store' %}">Tienda</a>
+        </li>
+        <!-- IDEA: si quiero llamar el nombre del usuario: {{request.user}} -->
+        {% if user.is_authenticated %}
+        <li class="nav-item px-lg-4">
+          <a href="#" class="nav-link text-uppercase text-expanded">{{request.user}}</a>
+        </li>
+        <li class="nav-item px-lg-4">
+          <a href="/accounts/logout/" class="btn btn-warning">Salir</a>
+        </li>
+        {% else  %}
+        <li class="nav-item px-lg-4">
+          <a href="/accounts/login/" class="btn btn-warning">Ingresar</a>
+        </li>
+         {% endif %}
+        <li class="nav-item px-lg-4">
+          <a href="#""> <img id='cart-icon' src="{% static 'img/cart.png' %}" alt=""></a>
+        </li>
+        <li>
+            <p id="cart-total">{{cartItems}}</p>
+        </li>
+
+
+      </ul>
+
+
+    </div>
+
+
+
+
+
+
+  </div>
+</nav>

@@ -1,0 +1,107 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Lista Posts{% endblock %}
+
+{% block content %}
+
+<main role="main">
+  <section class="page-section clearfix">
+    <div class="container">
+      <div class="intro">
+        <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'img/news2.webp' %}" alt="">
+        <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+          <h2 class="section-heading mb-4">
+            <span class="section-heading-upper">Eventos y comunicados</span>
+            <p class="lead text-muted">En ésta sección se postearan los eventos y comunicados que surgan. Recuerda que para poder interactuar en los mismos (ya sea para dejar un "me gusta" o un comentario, es necesario ser un usuario registrado)</p>
+          </h2>
+
+          <div class="intro-button mx-auto">
+            <a class="btn btn-primary btn-xl" href="{% url 'core_app:inicio' %}">Inicio</a>
+            {% if not user.is_authenticated %}
+            <a href="/accounts/login/" class="btn btn-secondary my-2">Ingresar</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 rounded p-5"">
+    <div class="container">
+
+      <div class="row">
+        {% for object in object_list %}
+              <div class="card mt-2 mr-3" style="width: 22rem;">
+                <img src="{{object.thumbnail.url}}" class="card-img-top" max-height:'286' alt="...">
+                <div class="card-body">
+                  <a href="{{ object.get_absolute_url }}">
+                    <h5 class="card-title">{{object.title}}</h5>
+                  </a>
+                  <p class="card-text">{{object.content|truncatechars:30}}</p>
+                  <hr>
+                  <p class="card-text">
+                    <span><i class="fas fa-eye ml-2"></i>{{object.get_view_count}}</span>
+                    <span><i class="fas fa-thumbs-up ml-2"></i>{{object.get_like_count}}</span>
+                    <span><i class="fas fa-comments ml-2"></i>{{object.get_comment_count}}</span>
+                  </p>
+                  <hr>
+                  <p class="card-text">Publicado hace {{object.publish_date|timesince}}</p>
+                </div>
+              </div>
+        {% endfor %}
+          </div>
+      </div>
+    </div>
+</main>
+
+
+{% endblock %}
+
+
+
+
+
+
+<!-- IDEA: viejo -->
+<section class="page-section clearfix">
+  <div class="container">
+
+        <h2 class="section-heading mb-4">
+          <span class="section-heading-upper text-center text-warning">Noticias y Eventos</span>
+        </h2>
+          <div class="row" style="background-image: url('/img/news.jpg');">
+          <!-- IDEA:   <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'img/news.jpg' %}" alt="" style=" opacity:0.3;"> -->
+            {% for object in object_list %}
+            <div class="col-4">
+              <div class="card" style="width: 18rem;">
+                <img src="{{object.thumbnail.url}}" class="card-img-top" max-height:'286' alt="...">
+                <div class="card-body">
+                  <a href="{{ object.get_absolute_url }}">
+                    <h5 class="card-title">{{object.title}}</h5>
+                  </a>
+                  <p class="card-text">{{object.content|truncatechars:30}}</p>
+                  <hr>
+                  <p class="card-text">
+                    <span><i class="fas fa-eye ml-2"></i>{{object.get_view_count}}</span>
+                    <span><i class="fas fa-thumbs-up ml-2"></i>{{object.get_like_count}}</span>
+                    <span><i class="fas fa-comments ml-2"></i>{{object.get_comment_count}}</span>
+                  </p>
+                  <hr>
+                  <p class="card-text">Publicado hace {{object.publish_date|timesince}}</p>
+                </div>
+              </div>
+            </div>
+
+            {% endfor %}
+
+          </div>
+      </div>
+</section>
+
+<!-- IDEA: hasta aca -->
+
+
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

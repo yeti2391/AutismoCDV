@@ -1,0 +1,194 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+
+<!-- Cabecera -->
+<section class="page-section clearfix">
+  <div class="container">
+    <div class="intro">
+      <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'img/autismosimbolo.jpg' %}" alt="">
+      <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+        <h2 class="section-heading mb-4">
+          <span class="section-heading-upper">Autismo Camino de Vida</span>
+          <span class="section-heading-lower">¿Quiénes somos?</span>
+        </h2>
+
+        <div class="intro-button mx-auto">
+          <a class="btn btn-primary btn-xl" href="#lugar">Visítanos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDEA: AGREGAR CARDS -->
+<section class="page-section clearfix">
+  <div class="container">
+    <div class="intro">
+      <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'img/registro03.png' %}" alt="">
+      <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+        <p class="mb-3">Somos una organización compuesta por distintas familias y técnicos, que buscamos que este nuevo camino de vida sea aceptado.</p>
+        <p>Que no se nos impongan barreras, donde la sociedad acepte nuestro camino, que sea considerado como una forma más de vivir.</p>
+        <p>Que un diagnóstico no sea dictamen! Evitar etiquetas de por vida y que seamos integraos a la sociedad con naturalidad.</p>
+        <p>Queremos llegar a todas las clases sociales, dando la oportunidad de acceder a becas, capacitaciones para Asistentes Personales que son un nexo fundamental para las necesidades de la persona con Autismo y las familias.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section about-heading">
+  <div class="container">
+    <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="{% static 'img/simbolo.jpg' %}" alt="">
+    <div class="about-heading-content">
+      <div class="row">
+        <div class="col-xl-9 col-lg-10 mx-auto">
+          <div class="bg-faded rounded p-5">
+            <p>Brindar y preparar a familias que carecen de información o buscan ampliar aún más sus conocimientos.</p>
+            <p>Realizar distintos tipos de talleres como (juegos, alimentación, etc)</p>
+            <p>Dar apoyo emocional cuando lo necesite la familia.</p>
+            <p>Queremos que te involucres en este nuevo camino de vida, que puedas darte cuenta que el mundo es uno, que todos vivimos en el mismo, que todos vivimos de manera dierente y que sería más fácil que tomaras nuestra mano y camines con nosotros.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="page-section clearfix">
+  <div class="container">
+    <div class="intro">
+      <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'img/niño.webp' %}" alt="">
+      <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+        <p class="mb-0">Una vez que la familia recibe el diagnóstico puede ser tomado de formas muy distintas. Se cruzarán muchos: "-¿Por qué a mí?, -¿Por qué a mí hijo?, -Es un castigo, -Reclamos a nuestras creencias, -Enojo, -Llanto, -¿Qué voy a hacer?, ¿Qué pasará ahora?", entre muchas cosas más.</p>
+        <p>Muchas veces cuesta creerlo, aceptarlo, nos da miedo el pensar que pasará cuando yo no esté para ayudarlo.</p>
+        <p>Cualquier comentario que nos hagan sobre nuestro hijo/a será mal visto.</p>
+        <p>Empezamos a buscar por todos los medios información sobre Autismo, más que nada si tiene cura, que pasará después del diagnóstico.</p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section about-heading" style="margin-top:250px;">
+  <div class="container">
+    <div class="about-heading-content">
+      <div class="row">
+        <div class="col-xl-9 col-lg-10 mx-auto">
+          <div class="bg-faded rounded p-5">
+            <p>Pasaremos horas y noches buscando encontrar una solución, pero no podremos cambiar nuestra realidad, debemos aceptarlo y comenzar a re organizar nuestra vida acorde a las necesidades del niño.</p>
+            <p>El comienzo no será fácil, nos sentiremos cansados de golpear puertas, como hemos dicho anteriormente nuestra vida cambia y hay que adaptarse a la nueva realidad.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<!-- Mensaje -->
+<section class="page-section cta">
+  <div class="container">
+
+
+      <div class="row">
+
+              <div class="col-xl-6 col-lg-6 mx-auto">
+                <div class="bg-faded rounded p-5" style="color: #1C5B7A; ">
+                  <h2 class="section-heading mb-4">
+                    <span class="section-heading-upper">Envíanos tus dudas</span>
+                    <span class="section-heading-lower">Contacto</span>
+                  </h2>
+                  <!-- Formulario de contacto -->
+                  <form action="" method="POST">
+                      {% csrf_token %}
+                      <div class="form-group">
+                          <label>Nombre *</label>
+                          <div class="input-group">
+                              {{form.name}}
+                          </div>
+                          {{form.name.errors}}
+                      </div>
+                      <div class="form-group">
+                          <label>Email *</label>
+                          <div class="input-group">
+                              {{form.email}}
+                          </div>
+                          {{form.email.errors}}
+                      </div>
+                      <div class="form-group">
+                          <label>Mensaje *</label>
+                          <div class="input-group">
+                              {{form.content}}
+                          </div>
+                          {{form.content.errors}}
+                      </div>
+                      <div class="text-center">
+                          <input type="submit" class="btn btn-primary btn-block py-2" value="Enviar">
+                      </div>
+                  </form>
+                  <!-- Fin formulario de contacto -->
+                </div>
+              </div>
+
+      <!-- IDEA: ACÁ TERMINA CONTACTO Y EN LA MISMA ROW PONGO VISITANOS -->
+
+              <div class="col-xl-6 col-lg-6 mx-auto">
+                <div class="bg-faded rounded p-5" style="color: #1C5B7A; ">
+                  <h2 class="section-heading mb-4">
+                    <span class="section-heading-upper" name='lugar' id='lugar'>Ven a conocernos</span>
+                    <span class="section-heading-lower">Vísitanos</span>
+                  </h2>
+
+
+                      <div class="form-group">
+
+                          <p><strong>Teléfono:</strong> 099843570</p>
+                          <p><strong>Dirección: Luis A. de Herrera 1458</strong></p>
+                          <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3272.4745967348463!2d-56.1550175842649!3d-34.894537580385105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x959f81021a293c9f%3A0x47c23b3c464091c1!2sEstadio%20Centenario!5e0!3m2!1ses-419!2suy!4v1602291250533!5m2!1ses-419!2suy" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                          </div>
+                      </div>
+
+                </div>
+              </div>
+      <!-- IDEA: ACA TERMINA VISITANOS Y LA ROW EN EL DIV SIGUIENTE-->
+        </div>
+
+        <!-- IDEA: aca link a trabajar con nosotros -->
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 mx-auto">
+            <div class="bg-faded rounded p-5" style="color: #1C5B7A; ">
+              <h2 class="section-heading mb-4">
+                <span class="section-heading-upper">¿Te gustaría trabajar con nosotros?</span>
+                <span class="section-heading-lower"></span>
+              </h2>
+
+              <p><a href="{% url 'contacto_app:contacto' %}"><button class="btn btn-primary btn-block py-2" type="button" name="button">Envíanos tu CV</button></a></p>
+
+                  <div class="form-group">
+
+                  </div>
+
+            </div>
+          </div>
+        </div>
+
+
+  </div>
+</section>
+<section class="page-section about-heading col-12">
+
+
+
+
+</section>
+
+{% endblock %}

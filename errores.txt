@@ -1,0 +1,15 @@
+Errores:
+	en esta version lo unico que no funciona es el carrito.
+	1) Por alguna razon si en la urls.py, de la carpeta settings, el path a blog se encuentra antes que el path a store (que es mi app de carrito) al intentar ingresar al template correspondiente me salta un error 404 e incluso dice: error raised by apps.blog.detailview (que no tiene nada que ver a la direccion que es llamada).
+	2) Si por el contrario el orden en url patterns es de primero la store y luego el blog, ahi me salta el mismo error 404 para entrar a blog y aún así tampoco ingresa a store ya que aparece un error en la view de la app store.
+
+
+
+
+
+
+
+
+
+Demás todo funciona, los correos de contacto y de unetenos llegan a sus respectivos destinatarios correctamente, se puede registrarse a través de google como usuario, si te registras por mail te manda un correo de verificación (el cual llega correctamente aunque hay que buscar ese mail dentro de la carpeta de correos no deseados XD), permite restablecer contraseña por mail, entre las cosas más útiles. 
+Es por eso que insisto con ésta versión en vez de volver a una más vieja funcional.
