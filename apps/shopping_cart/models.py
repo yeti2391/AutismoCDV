@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.db.models import Sum
 from django.db import models
 from apps.content.models import Course
 # Create your models here.
@@ -17,6 +18,10 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    #para obtener el total de compras (se usa en order_summary.html):
+    def get_total(self):
+        return self.items.all().aggregate(order_total=Sum('course__price'))['order_total']
 
 #para seguimiento de las compras realizadas:
 class Payment(models.Model):

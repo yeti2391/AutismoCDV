@@ -2,14 +2,14 @@
 
 {% load static %}
 
-{% block title %}Contacto{% endblock %}
+{% block title %}Carrito{% endblock %}
 
 {% block content %}
 
 <section class="page-section clearfix">
   <div class="container">
     <div class="intro">
-      <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'img/exito.webp' %}" alt="">
+      <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'img/compras.jpg' %}" alt="">
       <div class="intro-text left-0 text-center bg-faded p-5 rounded">
         <h2 class="section-heading mb-4">
           <span class="section-heading-upper">Lista de Compras</span>
@@ -25,14 +25,38 @@
             {% for item in order.items.all %}
               <tr>
                 <td>{{forloop.counter}}</td>
-                <td>{{item.course.name}}</td>
+                <td>{{item.course.name}}
+                  <span class="pull-right"><a href="{% url 'cart_app:remove-from-cart' item.course.slug %}" class="text-danger"><i class="fas fa-trash"></i></a></span>
+                </td>
                 <td>${{item.course.price}}</td>
-                
+
               </tr>
+            {% empty %}
+            <tr>
+              <td colspan="3">Aún no has agregado artículos al carrito</td>
+            </tr>
             {% endfor %}
+            {% if order.get_total > 0 %}
+            <tr>
+              <td colspan="2">
+                <strong class="pull-right">Total: </strong>
+              </td>
+              <td colspan="1">
+                <strong>${{ order.get_total }}</strong>
+              </td>
+            </tr>
+            {% endif %}
         </table>
+
         <div class="intro-button mx-auto">
-          <a class="btn btn-primary btn-xl" href="{% url 'core_app:inicio' %}">Página Principal</a>
+          <a class="btn btn-primary btn-xl" href="#">
+            {% if order.get_total > 0 %}
+              Comprar
+          <!-- IDEA: se podria hacer otro boton que lleve a cursos y tienda -->
+          {% else %}
+              Agregar artículos
+          {% endif %}
+          </a>
         </div>
       </div>
     </div>
