@@ -4,7 +4,7 @@ from .forms import ContactForm
 
 
 def inicio(request):
-    
+
     contact_form = ContactForm()
 
     if request.method == "POST":
@@ -19,7 +19,7 @@ def inicio(request):
                 "ONG prueba: Nuevo mensaje de contacto",
                 "De {} <{}>\n\nEscribió:\n\n{}".format(name, email, content),
                 "no-contestar@inbox.mailtrap.io",
-                ["ongautismouy@gmail.com"],
+                ["autismocdv@gmail.com"],
                 reply_to=[email]
             )
 

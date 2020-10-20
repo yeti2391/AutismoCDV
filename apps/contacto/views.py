@@ -23,7 +23,7 @@ def contact(request):
                 "Autismo Camino de Vida: Nuevo mensaje de contacto",
                 "De {} <{}>\n\nEscribió:\n\n{}".format(name, email, content, file),
                 "no-contestar@inbox.mailtrap.io",
-                ["ongautismouy@gmail.com"],
+                ["autismocdv@gmail.com"],
                 reply_to=[email]
             )
             uploaded_file = request.FILES['file'] # file is the name value which you have provided in form for file field

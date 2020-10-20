@@ -18,6 +18,8 @@
                 <div class="col-xl-6 col-lg-6 mx-auto" style="border-right: solid;">
                   <h4 class="section-heading-lower">Asesoramiento:</h4>
                   <p>A través de una pequeña suscripción mensual ofrecemos asesoramiento e información sobre el Autismo y su marco normativo en nuestro país</p>
+                  <!-- IDEA: suscripcion: -->
+                  <div id="paypal-button-container"></div>
 
                 </div>
 
@@ -34,5 +36,16 @@
     </div>
   </div>
 </section>
+<!-- IDEA: agregando suscripciones mensuales -->
+<script
+     src="https://www.paypal.com/sdk/js?client-id=AbyTJKwLUxHVds6t59uuHQ72ANO9vIDp1LnRV-2dppHPglV_SxhqyVZh09IwnBDPaYW1urYxPNfgbPbm&currency=USD&vault=true">
+</script>
+
+
+
+<script>
+    paypal.Buttons().render('#paypal-button-container');
+  </script>
+
 
 {% endblock %}
