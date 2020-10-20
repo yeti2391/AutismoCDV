@@ -50,7 +50,7 @@
             </button>
           </div>
         </div>
-        {% if course in request.user.userprofile.cursos_list %}
+        {% if course_status == 'owned' %}
         <div class="">
               <video class= embed-responsive embed-responsive-16by9  controls>
                 <source src="{{video.videofile.url}}" type='video/mp4'>

@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block content %}
+
+<section class="page-section clearfix">
+  <div class="container">
+    <div class="intro">
+      <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'img/exito.webp' %}" alt="">
+      <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+        <h2 class="section-heading mb-4">
+          <span class="section-heading-upper">Lista de Compras</span>
+          <span class="section-heading-lower">algo</span>
+        </h2>
+        <table class="table table-hover table-bordered text-center">
+            <tr class="text-center">
+                <th>nº</th>
+                <th>Title</th>
+                <th>Price</th>
+
+            </tr>
+            {% for item in order.items.all %}
+              <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{item.course.name}}</td>
+                <td>${{item.course.price}}</td>
+                
+              </tr>
+            {% endfor %}
+        </table>
+        <div class="intro-button mx-auto">
+          <a class="btn btn-primary btn-xl" href="{% url 'core_app:inicio' %}">Página Principal</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

@@ -22,7 +22,7 @@ OWNED = 'owned'
 IN_CART = 'in_cart'
 NOT_IN_CART = 'not_in_cart'
 
-#adaptar a userprofile ya que no existe userlibrary
+#adaptar a userprofile == userlibrary
 def check_course_relationship(request, course):
     if course in request.user.userprofile.cursos.all():
         return OWNED
@@ -77,24 +77,3 @@ class VideoDetailView(generic.DetailView):
         course = get_object_or_404(Course, slug=self.kwargs["slug"])
         return course.videos.all()
         #el return es para que devuelva todos los videos que pertenecen al curso
-
-
-
-
-#agregar logica de si esta en carrito que no se pueda volver a agregar:
-"""from shopping_cart.models import Order, OrderItem
-
-def book_detail(request, slug):
-    #display a list of the chapter in this book
-    book=get_object_or_404(Book, slug=slug)
-    order = Order.objects.get(user=request.user)
-    order_item = OrderItem.objects.get(book=book)
-    book_is_in_cart=False
-    if order_item in order.items.all():
-        book_is_in_cart=True
-    context={
-        'book':book,
-        'in_cart':book_is_in_cart
-    }
-    return render(request, "book_detail.html", context)
-"""

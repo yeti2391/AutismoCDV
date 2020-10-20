@@ -1,5 +1,6 @@
 
 {% load static %}
+{% load cart_template_tags %}
 <!-- IDEA:
 <div class="banner" style="width: 100%; text-align:center;">
 <div class="banner-content">
@@ -48,10 +49,15 @@
           <a class="nav-link text-uppercase text-expanded" href="{% url 'store_app:store' %}">Tienda</a>
         </li>
         <!-- IDEA: si quiero llamar el nombre del usuario: {{request.user}} -->
-        {% if user.is_authenticated %}
+        {% if request.user.is_authenticated %}
         <li class="nav-item px-lg-4">
-          <a href="#" class="nav-link text-uppercase text-expanded">{{request.user}}</a>
+          <a href="#" class="nav-link text-uppercase text-expanded">{{user}}</a>
         </li>
+        <!-- IDEA: prueba templatetag contador -->
+        <li class="nav-item px-lg-4">
+          <a href="{% url 'cart_app:order-summary' %}" class="nav-link text-uppercase text-expanded"><i class="fas fa-shopping-cart">{{request.user|cart_item_count}}</i></a>
+        </li>
+
         <li class="nav-item px-lg-4">
           <a href="/accounts/logout/" class="btn btn-warning">Salir</a>
         </li>
