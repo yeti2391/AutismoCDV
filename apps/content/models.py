@@ -18,7 +18,7 @@ class Course(models.Model):
     description = models.TextField()
     price = models.FloatField()
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
+    #agregar despues un field de recursos para descargar material nose si aca o en video mejor
 
     def __str__(self):
         return self.name

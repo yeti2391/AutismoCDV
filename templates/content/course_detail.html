@@ -40,12 +40,24 @@
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 bg-light">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">{{object.name}}</h1>
+          <h1 class="h2">{{course.name}}</h1>
           <div class="btn-toolbar mb-2 mb-md-0">
+            {% if course_status != 'owned' %}
             <div class="btn-group mr-2">
-              <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+
+                {% if course_status == 'in_cart' %}
+                <a href="{% url 'cart_app:remove-from-cart' course.slug %}">
+                  <button data-action="add" class="btn btn-outline-secondary add-btn update-cart">Quitar del carrito</button>
+                </a>
+                {% else %}
+                <a href="{% url 'cart_app:add-to-cart' course.slug %}">
+                  <button data-action="add" class="btn btn-outline-secondary add-btn update-cart">Agregar al carrito</button>
+                </a>
+                {% endif %}
+
               <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
             </div>
+            {% endif %}
             <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
               <span data-feather="calendar"></span>
               This week
@@ -54,8 +66,8 @@
         </div>
         <div class="">
 
-            <img src="{{object.thumbnail.url}}" class="my-4 w-100" id="myChart" width="900" height="380">
-            <p>{{object.description}}</p>
+            <img src="{{course.thumbnail.url}}" class="my-4 w-100" id="myChart" width="900" height="380">
+            <p>{{course.description}}</p>
         </div>
         <h2>Contenido del Curso</h2>
         <div class="table-responsive">

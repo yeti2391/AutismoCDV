@@ -8,7 +8,7 @@ from apps.content.models import Course
 class UserProfile(models.Model):
     #agregar opciones de me gusta
     #agregar despues una relacion con Product en store.models
-    cursos = models.ManyToManyField(Course)
+    cursos = models.ManyToManyField(Course, blank=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
