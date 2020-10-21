@@ -9,6 +9,25 @@ from django.shortcuts import reverse
 
 
 # Create your models here.
+
+class Product(models.Model):
+    name = models.CharField(max_length = 200)
+    slug = models.SlugField(unique=True)
+    thumbnail = models.ImageField(verbose_name="Imagen", upload_to="productsThumbnails", null=True, blank=True)
+    price = models.FloatField()
+    description = models.CharField(max_length=200, null = True, blank=True)
+    #cambiar digital boolean a default true cuando este todo pronto
+    # despues cambiar el valor de order property shipping en el for
+    # tambien revisar en views la opcion shipping sino tiene q cambiarse
+    digital = models.BooleanField(default=True, null=True, blank=False)
+
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("content_app:product-detail", kwargs={"slug":self.slug})
+
 class Course(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)

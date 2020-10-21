@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.views import generic
 from django.shortcuts import render, get_object_or_404
-from .models import Course, Video
+from .models import Course, Video, Product
 from apps.shopping_cart.models import Order, OrderItem
 # Create your views here.
 
@@ -15,6 +15,16 @@ class CourseDetailView(generic.DetailView):
     template_name = "content/course_detail.html"
     queryset = Course.objects.all()
     """
+
+class ProductListView(generic.ListView):
+    template_name = "content/product_list.html"
+    queryset = Product.objects.all()
+    paginate_by = 10
+
+class ProductDetailView(generic.DetailView):
+    template_name="content/product_detail.html"
+    queryset = Product.objects.all()
+
 #variables globales para defenir la relacion en CourseDetailView
 #en lugar del booleano q habia
 # y se crea la funcion check_course_relationship para que haga esa tarea

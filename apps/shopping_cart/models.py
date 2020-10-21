@@ -23,6 +23,8 @@ class Order(models.Model):
     def get_total(self):
         return self.items.all().aggregate(order_total=Sum('course__price'))['order_total']
 
+"""
+#lo dejo todo comentado payment porq al usar paypal en lugar de stripe lo hace auto
 #para seguimiento de las compras realizadas:
 class Payment(models.Model):
     #revisar si en produccion combiene usar on_delete CASCADE ya que de borrarse
@@ -34,3 +36,4 @@ class Payment(models.Model):
 
     def __str__(self):
         return self.stripe_charge_id
+"""

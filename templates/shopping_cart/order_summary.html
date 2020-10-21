@@ -97,12 +97,47 @@
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
                     // Show a success message to the buyer
-                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                    alert('Se realizo el pago exitosamente ' + details.payer.name.given_name + '!');
+
+                    //funcion definida abajo que nos lleva  a la pagina que elija
+                    //submitFormData()
+                    //mi agregado:
+
+                    .then((data)=>{
+                      {% redirect render('core_app:inicio') %}
+                      //window.location.href="{% url 'core_app:inicio' %}"
                 });
             }
 
 
         }).render('#paypal-button-container');
-    </script>
 
+    </script>
+<!-- IDEA:
+  <script type="text/javascript">
+  */      
+    //se define submitFormData que se va a encargar de guardar la orden de compra y por ultimo redirigir usuario
+
+    function submitFormData(){
+      console.log('Se ejecuto orden de compra')
+
+      var url = '/process_order/'
+      fetch(url,{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
+      })
+      .then((response)=> response.json())
+      .then((data)=>{
+        console.log('Success: ', data);
+        alert('Transaccion completada');
+        window.location.href="#"
+      })
+
+    } */
+  </script>
+ -->
 {% endblock %}

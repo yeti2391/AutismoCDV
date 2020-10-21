@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'apps.servicios',
     'apps.contacto',
     'apps.blog',
-    'apps.store',
+    
     'apps.content',
     'user',
     'apps.shopping_cart',
