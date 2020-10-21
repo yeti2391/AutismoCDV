@@ -37,8 +37,9 @@ def pago(request):
     #para la validacion: (adaptar correctamente a mis modelos)
     #fijarse si aca no es donde tengo que pasar el curso comprado al perfil de usuario
     # linea original: if detalle_precio == curso.price:
-    if detalle_precio == payment:
+    if detalle_precio == payment.total_amount:
         trx = CaptureOrder().capture_order(order_id, debug=True)
+        print('transaccion: ' + trx.result.id)
         #  a continuacion modelo Compra = documentacion Paypal
         pedido = Compra(
             id= trx.result.id,
@@ -52,13 +53,11 @@ def pago(request):
             direccion_cliente= trx.result.purchase_units[0].shipping.address.address_line_1)
         pedido.save() #guardamos en base de datos la info de la Transaccion
         #la funcion json en el html esta pidiendo una respuesta por lo q se le pasa esta variable data:
-        print(pedido.id)
-        data= {
+        data = {
             "id": f"{trx.result.id}",
             "nombre_cliente": f"{trx.result.payer.name.given_name}",
-            "mensaje": "=D"
+            "mensaje": "Ahora ya puedes acceder al contenido! =D"
         }
-
         return JsonResponse(data)
     else:
         data = {
