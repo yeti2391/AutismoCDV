@@ -2,13 +2,14 @@ from django.db import models
 from django.conf import settings
 #1)voy a necesitar signals para crear este perfil de usuario con cada nuevo user
 from django.db.models.signals import post_save
-from apps.content.models import Course
+from apps.content.models import Course, Product
 # Create your models here.
 
 class UserProfile(models.Model):
     #agregar opciones de me gusta
     #agregar despues una relacion con Product en store.models
     cursos = models.ManyToManyField(Course, blank=True)
+    product = models.ManyToManyField(Product, blank=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):

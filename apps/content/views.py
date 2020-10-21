@@ -19,7 +19,7 @@ class CourseDetailView(generic.DetailView):
 class ProductListView(generic.ListView):
     template_name = "content/product_list.html"
     queryset = Product.objects.all()
-    paginate_by = 10
+    #paginate_by = 10
 
 class ProductDetailView(generic.DetailView):
     template_name="content/product_detail.html"

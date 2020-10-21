@@ -7,7 +7,7 @@ from django.utils.text import slugify
 #hasta aca señales
 from django.shortcuts import reverse
 
-
+ 
 # Create your models here.
 
 class Product(models.Model):

@@ -26,7 +26,7 @@ urlpatterns = [
     path('', include(('apps.servicios.urls'))),
     path('', include(('apps.contacto.urls'))),
     path('', include(('apps.shopping_cart.urls'))),
-    
+    path('', include(('paypal.urls'))),
     path('', include(('apps.blog.urls'))),
     path('', include(('user.urls'))),
 

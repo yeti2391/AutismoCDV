@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from apps.content.models import Course
 from django.contrib.auth.decorators import login_required
@@ -35,42 +35,7 @@ def order_view(request):
 
 
 #para tomar la orden de compra:
-"""@login_required
-def processOrder(request):
-    #Solo para probar que se este dando correctamente la orden de pago (comentar de print hasta render para la prueba)
-    print('Data: ', request.body)
-    transaction_id = datetime.datetime.now().timestamp()
-    data = json.loads(request.body)
-    #configuracion de orden para usuario atentificado y anonimo
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
 
-        #esto hace un chequeo de precio para verificar que desde el frontend no haya una modificacion en el precio:
-        total = float(str(data['form']['total'].strip().replace(',','.')))
-
-        order.transaction_id = transaction_id
-
-        #se agrega lo siguiente para chequear que lo que se procesa desde el frontend coincida
-        # con los datos del backend para evitar manipulacion de precio por parte de usuarios:
-        if total == order.get_cart_total:
-            order.complete = True
-        order.save()
-
-        #se configura el envio:
-        if order.shipping == True:
-            ShippingAddress.objects.create(
-                customer=customer,
-                order=order,
-                address = data['shipping']['address'],
-                city = data['shipping']['city'],
-                state = data['shipping']['state'],
-                zipcode = data['shipping']['zipcode'],
-            )
-    else:
-        print('User is not logged in...')
-    return JsonResponse('Pago completado', safe=False)
-"""
 """
 #agregados para pagar por stripe adaptar:
 #esto deberia ir arriba del todo:
