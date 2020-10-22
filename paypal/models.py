@@ -1,6 +1,6 @@
 from django.db import models
 from apps.shopping_cart.models import Order
-
+from apps.content.models import Course, Product
 # Create your models here.
 
 
@@ -13,12 +13,13 @@ from apps.shopping_cart.models import Order
         return self.producto
 """
 
-#
+
 class Compra(models.Model):
     id = models.CharField(primary_key= True, max_length=100)
     estado = models.CharField(max_length=100)
     codigo_estado = models.CharField(max_length=100)
-    #producto = models.ForeignKey(to=Producto, on_delete= models.SET_NULL, null = True)
+    cursos = models.ManyToManyField(to=Course, blank=True)
+    #productos = models.ManyToManyField(to=Product, blank=True)
     total_de_la_compra = models.DecimalField(max_digits=5 ,decimal_places= 2)
     nombre_cliente = models.CharField(max_length=100)
     apellido_cliente = models.CharField(max_length=100)
