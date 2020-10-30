@@ -1,0 +1,58 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Lista de Personal{% endblock %}
+
+{% block content %}
+
+<main role="main">
+  <section class="page-section clearfix">
+    <div class="container">
+      <div class="intro">
+        <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'img/funcionarios.jpg' %}" alt="">
+        <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+          <h2 class="section-heading mb-4">
+            <span class="section-heading-upper">Lista de nuestro equipo</span>
+            <p class="lead text-muted">En ésta sección se hará una lista de las personas que integran nuestro equipo junto a una breve descripcion de los mismos</p>
+          </h2>
+
+          <div class="intro-button mx-auto">
+            <a class="btn btn-primary btn-xl" href="{% url 'core_app:inicio' %}">Inicio</a>
+            {% if not user.is_authenticated %}
+            <a href="/accounts/login/" class="btn btn-secondary my-2">Ingresar</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 rounded p-5"">
+    <div class="container">
+
+      <div class="row">
+        {% for object in object_list %}
+              <div class="card mt-2 mr-3" style="width: 22rem;">
+                <img src="{{object.thumbnail.url}}" class="card-img-top" max-height:'286' alt="...">
+                <div class="card-body">
+                  <a href="{% url 'personal_app:personal-detail' object.slug %}">
+                    <h5 class="card-title">{{object.name}} {{object.last_name}}</h5>
+                  </a>
+                  <p class="card-text">{{object.description|truncatechars:30}}</p>
+                  <hr>
+                  <p class="card-text">{{object.skills}}</p>
+                  <hr>
+                  <p class="card-text">{{object.mail}}</p>
+                </div>
+              </div>
+        {% endfor %}
+          </div>
+      </div>
+    </div>
+</main>
+
+
+
+
+{% endblock %}

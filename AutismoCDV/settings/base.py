@@ -38,13 +38,13 @@ INSTALLED_APPS = [
     #paypal
     'paypal.apps.PaypalConfig',
     'paypalcheckoutsdk',
-    
+
     #mis apps:
     'apps.core',
     'apps.servicios',
     'apps.contacto',
     'apps.blog',
-
+    'apps.personal',
     'apps.content',
     'user',
     'apps.shopping_cart',

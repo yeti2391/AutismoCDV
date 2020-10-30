@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Contacto{% endblock %}
+{% block title %}Tienda{% endblock %}
 
 {% block content %}
 <section class="page-section about-heading">
@@ -27,8 +27,8 @@
 
 <section class="page-section about-heading">
   <div class="row">
-      {% for product in product %}
-      <div class="col-lg-4">
+      {% for product in object_list %}
+      <div class="col-lg-2">
         <!-- IDEA:
         <img class="thumbnail" src="{{course.imageURL}}" alt="">
          -->
@@ -36,16 +36,8 @@
         <div class="box-element product">
           <h6><strong>{{product.name}}</strong></h6>
           <hr>
-          <!-- IDEA: agregar logica de si ya esta comprado que no se pueda volver a agregar al carrito
-          {% if in_cart %}
-          <button data-action="add" class="btn btn-outline-secondary add-btn update-cart">Ya adquirido</button>
-          {% else %}
-          <a href="{% url 'cart_app:add-to-cart' course.slug %}">
-            <button data-action="add" class="btn btn-outline-secondary add-btn update-cart">Agregar al carrito</button>
-          </a>
-          {% endif %}
-           -->
-          <a class='btn btn-outline-success btn-block btn-primary text-light' href="{{product.get_absolute_url}}">Ver</a>
+
+          <a class='btn btn-outline-success btn-primary text-light' href="{% url 'content_app:product-detail' product.slug %}">Ver detalles</a>
           <h4 style="display: inline-block; float:right;">${{product.price}}</h4>
         </div>
       </div>
@@ -59,6 +51,17 @@
 {% endblock %}
 
 
+
+
+<!-- IDEA: agregar logica de si ya esta comprado que no se pueda volver a agregar al carrito
+{% if in_cart %}
+<button data-action="add" class="btn btn-outline-secondary add-btn update-cart">Ya adquirido</button>
+{% else %}
+<a href="{% url 'cart_app:add-to-cart' course.slug %}">
+  <button data-action="add" class="btn btn-outline-secondary add-btn update-cart">Agregar al carrito</button>
+</a>
+{% endif %}
+ -->
 
 
 
@@ -92,7 +95,6 @@
         </div>
     </div>
   </div>
-
 
 
 <!-- IDEA:  hasta aca -->

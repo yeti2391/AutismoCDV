@@ -7,7 +7,7 @@ from django.utils.text import slugify
 #hasta aca señales
 from django.shortcuts import reverse
 
- 
+
 # Create your models here.
 
 class Product(models.Model):
@@ -49,10 +49,11 @@ class Course(models.Model):
 
 class Video(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='videos')
-    videofile = models.FileField(upload_to='courseVideos', null=True, verbose_name="videos de curso")
+    videofile = models.FileField(upload_to='courseVideos', verbose_name="videos de curso")
     title = models.CharField(max_length=150)
     slug = models.SlugField(unique=True)
     description = models.TextField()
+    resource = models.FileField(upload_to='courseVideosRES', null=True, blank=True)
     #quizas agragar un campo tipo para descargar recursos que acompañen el video
     def __str__(self):
         return self.title
@@ -72,5 +73,10 @@ def pre_save_video(sender,instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = slugify(instance.title)
 
+def pre_save_product(sender,instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = slugify(instance.name)
+
 pre_save.connect(pre_save_course, sender=Course)
 pre_save.connect(pre_save_video, sender=Video)
+pre_save.connect(pre_save_product, sender=Product)

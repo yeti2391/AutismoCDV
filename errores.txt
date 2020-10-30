@@ -1,15 +1,25 @@
 Errores:
-	en esta version lo unico que no funciona es el carrito.
-	1) Por alguna razon si en la urls.py, de la carpeta settings, el path a blog se encuentra antes que el path a store (que es mi app de carrito) al intentar ingresar al template correspondiente me salta un error 404 e incluso dice: error raised by apps.blog.detailview (que no tiene nada que ver a la direccion que es llamada).
-	2) Si por el contrario el orden en url patterns es de primero la store y luego el blog, ahi me salta el mismo error 404 para entrar a blog y aún así tampoco ingresa a store ya que aparece un error en la view de la app store.
+	En la app paypal, en la view en la linea 14 comienza la función pago. Esa función lo que hace es comparar el precio de los productos en la base de datos con los precios que figuran en el template (esa verificación es para evitar q algún vivo ande facturandose 0$) y a partir de ahí guarda todos los datos de la transacción en la base de datos a través del modelo en paypal.models.Compra. Estos datos pueden ser usados a modo de factura por un lado enviandose por mail al usuario y por otro lado queda un registro de la compra exitosa en la base de datos.
+
+	Lo que quiero hacer es que una vez hecha la compra de forma exitosa en el model Compra se guarde esos cursos que fueron comprados, y ahí pasarlos a un perfil de usuario, donde rapidamente pueda verse lo comprado y acceder a esos cursos.
+
+	El problema es principalmente como estoy definiendo esa relación entre la factura que se crea a través de la view de pago con el modelo Compra, no logro hacer que lo que quede guardado correctamente sean los cursos facturados, y por eso mismo no puedo enviarlos al perfil de usuario que se encuentra en la ruta de user.models.UserProfile.
+
+	Error que me tira es en paypal.views funcion pago en la linea 68 la cual es:
+		pedido.cursos.set(Order.objects.filter(id=order_id)).
+		ValueError: FIeld 'id' expected a number but got '6LE877309...' (este número varía porque es generado aleatoriamente por paypal y guardado en order_id)
+	
+
+	IMPORTANTE:
+		Pasos y funciones que ocurren para hacer la compra:
+		1) El usuario selecciona el curso a comprar (los cursos estan guardados en apps.content.models)
+		2) Al darle a agregar a carrito esos cursos son pasados al modelo apps.shopping_cart.OrderItem, y el modelo en apps.shopping_cart.Order se encarga de almacenar todos esos cursos seleccionados y relacionarlos con el usuario que quiere comprarlos.
+		3) Una vez hecha la orden en el paso 2 se al darle dentro del carrito a comprar se va a ejecutar primero el modelo ubicado en paypal.Payment que va a iniciar el proceso de pago y si el pago se realiza con exito es cuando se guarda en el modelo paypal.Compra todos los datos de esa compra realizada.
+
+
+RESUMEN:
+	Lo que busco es que el modelo Compra registre y guarde en la base de datos los cursos que son comprados para poder agregarlos a UserProfile. 
 
 
 
-
-
-
-
-
-
-Demás todo funciona, los correos de contacto y de unetenos llegan a sus respectivos destinatarios correctamente, se puede registrarse a través de google como usuario, si te registras por mail te manda un correo de verificación (el cual llega correctamente aunque hay que buscar ese mail dentro de la carpeta de correos no deseados XD), permite restablecer contraseña por mail, entre las cosas más útiles. 
-Es por eso que insisto con ésta versión en vez de volver a una más vieja funcional.
+	:CREO QUE ESTA TODO VOY CORTANDO POR ACA QUE TENGO QUE IR SALIENDO

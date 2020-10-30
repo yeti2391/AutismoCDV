@@ -34,3 +34,8 @@ EMAIL_HOST_USER = DEFAULT_FROM_EMAIL= 'autismocdv@gmail.com'
 EMAIL_HOST_PASSWORD = 'Marco.1234'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
+
+
+#paypal
+PAYPAL_CLIENT_ID  = "client id here"
+PAYPAL_SECRET_ID  =  "secret id here"

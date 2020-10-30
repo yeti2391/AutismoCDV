@@ -1,6 +1,6 @@
 from django.db import models
 from apps.shopping_cart.models import Order
-from apps.content.models import Course, Product
+#from apps.content.models import Course, Product
 # Create your models here.
 
 
@@ -18,7 +18,7 @@ class Compra(models.Model):
     id = models.CharField(primary_key= True, max_length=100)
     estado = models.CharField(max_length=100)
     codigo_estado = models.CharField(max_length=100)
-    cursos = models.ManyToManyField(to=Course, blank=True)
+    cursos = models.ManyToManyField(to=Order, related_name='comprado')
     #productos = models.ManyToManyField(to=Product, blank=True)
     total_de_la_compra = models.DecimalField(max_digits=5 ,decimal_places= 2)
     nombre_cliente = models.CharField(max_length=100)
@@ -38,9 +38,11 @@ class Compra(models.Model):
 class Payment(models.Model):
     #revisar si en produccion combiene usar on_delete CASCADE ya que de borrarse
     #un payment se estaría borrando la orden tambien!!!!!
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='payments')
     total_amount = models.FloatField()
     date_paid = models.DateTimeField(auto_now_add=True)
+    #probar este boolean y de ser positivo guardar esos cursos comprados en el perfil usuario
+    #successfull = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.order.user)

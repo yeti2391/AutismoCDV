@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from paypalcheckoutsdk.core import PayPalHttpClient, SandboxEnvironment
 from paypalcheckoutsdk.orders import OrdersGetRequest, OrdersCaptureRequest
 from apps.shopping_cart.models import Order
+from user.models import UserProfile
 from .models import Compra, Payment
 #from apps.content.models import Product, Course
 
@@ -45,7 +46,18 @@ def pago(request):
             id= trx.result.id,
             estado= trx.result.status,
             codigo_estado= trx.status_code,
-            #producto= Producto.objects.get(pk=1),
+            #producto= Producto.objects.get(pk=1),    ESTA ES LA LINEA ORIGIANL DEL CODIGO QUE GUARDA 1 PRODUCTO A 1 USUARIO
+
+            #cursos= [Order.objects.filter(pk=order_id)],  DE ACA A LA LINEA 60 SON INTENTOS DE HACER EL GUARDADO SIN EXITO NO LAS BORRE PARA NO ANDAR MODIFICANDO EL NUMERO DE LINEA CON EL ARCHIVO DE ERROR
+
+            #cursos = [item.course for item in order.items.all(),
+            #users = User.objects.filter(email__in=emails)
+            #instance = Setupuser.objects.create(organization=org)
+
+            #for user in users:
+            #    instance.emails_for_help.add(user)
+            #for curso in cursos:
+            #    request.user.UserProfile.cursos.add(curso)
             total_de_la_compra = trx.result.purchase_units[0].payments.captures[0].amount.value,
             nombre_cliente= trx.result.payer.name.given_name,
             apellido_cliente= trx.result.payer.name.surname,
@@ -53,6 +65,8 @@ def pago(request):
             direccion_cliente= trx.result.purchase_units[0].shipping.address.address_line_1)
         pedido.save() #guardamos en base de datos la info de la Transaccion
         #la funcion json en el html esta pidiendo una respuesta por lo q se le pasa esta variable data:
+        pedido.cursos.set(Order.objects.filter(id=order_id))   #ESTO ES LO QUE HAY QUE MODIFICAR PARA QUE GUARDE LOS CURSOS EN COMPRA
+        print(pedido.cursos)
         data = {
             "id": f"{trx.result.id}",
             "nombre_cliente": f"{trx.result.payer.name.given_name}",
@@ -64,8 +78,6 @@ def pago(request):
             "mensaje": "Error =( "
         }
         return JsonResponse(data)
-
- #esta data pasa como valor a fetch en el html
 
 
 #sacado de la documentacion de paypal

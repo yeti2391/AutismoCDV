@@ -78,7 +78,7 @@ def checkout(request):
         payment.save()
 
         #add the book to de user bool list
-        books = item.book for item in order.items.all()
+        books = [item.book for item in order.items.all()]
         for book in books:
             request.user.userlibrary.books.add(book)
 
@@ -92,4 +92,67 @@ def checkout(request):
         'order':order
     }
     return render(request, "checkout.html", context)
+"""
+"""
+modelos originales:
+
+class UserLibrary(models.Model):
+    books = models.ManyToManyField('Book') #se pone entre '' por esta referenciado abajo de esta class
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
+
+    #para ver que cosas efectivamente se compro:
+    def book_list(self):
+        return self.books.all()
+
+    class Meta:
+        verbose_name='Perfil de Usuario'
+        verbose_name_plural = 'Perfiles de usuarios'
+
+
+class Author(models.Model):
+    first_name
+    last_name
+    slug
+
+    def __str__
+        return
+
+class Book(models):
+    authors = ManyToManyField
+    head_title
+    publications_date
+    isbn
+    slug
+    civer
+    price
+
+class Chapter( mode)
+     book = ForeignKey
+     chapter_number
+     title
+
+----------------
+models shopcart:
+
+
+class OrderItem(models.Model):
+    book = models.ForeignKey(book, on_delete=models.CASCADE)
+
+
+class Order(models):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    is_ordered = models.Boolesa
+    items = models.ManyToManyField (OrderItem)
+    ref_code = models.CharField
+
+class Payment():
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    total_amount
+    date_paid
+    stripe_charge_id
+
+
 """
