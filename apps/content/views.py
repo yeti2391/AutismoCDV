@@ -36,7 +36,7 @@ NOT_IN_CART = 'not_in_cart'
 def check_course_relationship(request, course):
     if course in request.user.userprofile.cursos.all():
         return OWNED
-    order_qs=Order.objects.filter(user=request.user)
+    order_qs=Order.objects.filter(user=request.user, is_ordered=False)
     if order_qs.exists():
         order = order_qs[0]
         order_item_qs = OrderItem.objects.filter(course=course)

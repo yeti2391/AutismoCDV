@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     #paypal
-    'paypal.apps.PaypalConfig',
+    #'paypal.apps.PaypalConfig',
+    'apps.paypal',
     'paypalcheckoutsdk',
 
     #mis apps:

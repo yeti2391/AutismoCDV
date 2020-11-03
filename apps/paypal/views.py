@@ -62,10 +62,11 @@ def pago(request):
             nombre_cliente= trx.result.payer.name.given_name,
             apellido_cliente= trx.result.payer.name.surname,
             correo_cliente= trx.result.payer.email_address,
-            direccion_cliente= trx.result.purchase_units[0].shipping.address.address_line_1)
+            direccion_cliente= trx.result.purchase_units[0].shipping.address.address_line_1
+        )
         pedido.save() #guardamos en base de datos la info de la Transaccion
         #la funcion json en el html esta pidiendo una respuesta por lo q se le pasa esta variable data:
-        pedido.cursos.set(Order.objects.filter(id=order_id))   #ESTO ES LO QUE HAY QUE MODIFICAR PARA QUE GUARDE LOS CURSOS EN COMPRA
+        #pedido.cursos.set(Order.objects.filter(id=order_id))   #ESTO ES LO QUE HAY QUE MODIFICAR PARA QUE GUARDE LOS CURSOS EN COMPRA
         print(pedido.cursos)
         data = {
             "id": f"{trx.result.id}",

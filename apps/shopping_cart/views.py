@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
 from apps.content.models import Course
 from django.contrib.auth.decorators import login_required
@@ -9,16 +9,21 @@ from .models import Order, OrderItem
 def add_to_cart(request, course_slug):
     course = get_object_or_404(Course, slug=course_slug)
     order_item, created= OrderItem.objects.get_or_create(course=course) #esto hace coincidir course de estaa func. con el course de OrderItem
-    order, created = Order.objects.get_or_create(user=request.user)
+    #order, created = Order.objects.get_or_create(user=request.user) se modifica esta linea por la siguiente:
+    order, created = Order.objects.get_or_create(user=request.user, is_ordered=False)
     order.items.add(order_item)
     order.save()
+    #agregar mensajes para visualizar la accion
+    #messages.info(request, "Se agrego correctamente a su carrito de compras.")
+    #return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 @login_required
 def remove_from_cart(request, course_slug):
     course = get_object_or_404(Course, slug=course_slug)
     order_item= get_object_or_404(OrderItem, course=course)
-    order = get_object_or_404(Order, user=request.user)
+    #order = get_object_or_404(Order, user=request.user) se cambia por:
+    order = Order.objects.get(user=request.user, is_ordered=False)
     order.items.remove(order_item)
     order.save()
 
@@ -26,12 +31,14 @@ def remove_from_cart(request, course_slug):
 
 @login_required
 def order_view(request):
-    order = get_object_or_404(Order, user=request.user)
-    context = {
-        'order':order
-    }
-    return render(request, "shopping_cart/order_summary.html", context)
-
+    #order = get_object_or_404(Order, user=request.user)
+    order_qs = Order.objects.filter(user=request.user, is_ordered=False)
+    if order_qs.exists():
+        context = {
+            'order':order_qs[0]
+        }
+        return render(request, "shopping_cart/order_summary.html", context)
+    return Http404
 
 
 #para tomar la orden de compra:
@@ -53,7 +60,11 @@ def create_ref_code():
 
 @login_required
 def checkout(request):
-    order = get_object_or_404(Order, user=request.user)
+    order_qs = Order.objects.filter(user=request.user, is_ordered=False)
+    if order_qs.exists():
+        order:order_qs[0]
+    else:
+        return Http404
     if request.method == "POST":
         #complete the order (ref code and set ordered to true)
         order.ref_code = create_ref_code()
