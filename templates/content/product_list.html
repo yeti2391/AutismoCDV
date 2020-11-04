@@ -25,27 +25,27 @@
   </div>
 </section>
 
-<section class="page-section about-heading">
-  <div class="row">
-      {% for product in object_list %}
-      <div class="col-lg-2">
-        <!-- IDEA:
-        <img class="thumbnail" src="{{course.imageURL}}" alt="">
-         -->
-         <img class="thumbnail" src="{{product.thumbnail.url}}" alt="">
-        <div class="box-element product">
-          <h6><strong>{{product.name}}</strong></h6>
-          <hr>
+<div class="album py-5 rounded p-5">
+  <div class="container">
+    <div class="row">
+        {% for product in object_list %}
+        <div class="card mt-2 mr-3" style="width: 22rem;">
+          <!-- IDEA:
+          <img class="thumbnail" src="{{course.imageURL}}" alt="">
+           -->
+           <img class="thumbnail" src="{{product.thumbnail.url}}" alt="">
+          <div class="box-element product">
+            <h6><strong>{{product.name}}</strong></h6>
+            <hr>
 
-          <a class='btn btn-outline-success btn-primary text-light' href="{% url 'content_app:product-detail' product.slug %}">Ver detalles</a>
-          <h4 style="display: inline-block; float:right;">${{product.price}}</h4>
+            <a class='btn btn-outline-success btn-primary text-light' href="{% url 'content_app:product-detail' product.slug %}">Ver detalles</a>
+            <h4 style="display: inline-block; float:right;">${{product.price}}</h4>
+          </div>
         </div>
-      </div>
-      {% endfor %}
-
-
+        {% endfor %}
+    </div>
   </div>
-</section>
+</div>
 
 
 {% endblock %}

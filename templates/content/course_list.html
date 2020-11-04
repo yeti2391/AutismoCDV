@@ -11,41 +11,42 @@
   </div>
 </section>
 
-<section class="page-section about-heading">
-  <div class="row">
-      {% for course in courses %}
-      <div class="col-lg-3">
-        <!-- IDEA:
-        <img class="thumbnail" src="{{course.imageURL}}" alt="">
-         -->
-         <img class="thumbnail" src="{{course.thumbnail.url}}" alt="">
-        <div class="box-element product">
-          <h4 class="text-center" ><strong>{{course.name}}</strong></h4>
-          <h6 class="text-muted">Autor: {{course.author}}</h6>
-          <hr>
-          <!-- IDEA: agregar logica de si ya esta comprado que no se pueda volver a agregar al carrito
-          {% if in_cart %}
-          <button data-action="add" class="btn btn-outline-secondary add-btn update-cart">Ya adquirido</button>
-          {% else %}
-          <a href="{% url 'cart_app:add-to-cart' course.slug %}">
-            <button data-action="add" class="btn btn-outline-secondary add-btn update-cart">Agregar al carrito</button>
-          </a>
-          {% endif %}
+<div class="album py-5 rounded p-5">
+  <div class="contaier">
+    <div class="row">
+        {% for course in courses %}
+        <div class="card mt-2 mr-3" style="width: 22rem;">
+          <!-- IDEA:
+          <img class="thumbnail" src="{{course.imageURL}}" alt="">
            -->
-          <a class='btn btn-outline-success btn-block btn-primary text-light' href="{{course.get_absolute_url}}">Ver</a>
-            <div class="row pull-right p-2">
-              <p><strong>Precio: </strong></p>
-              <p>${{course.price}}</p>
-            </div>
+           <img class="thumbnail" src="{{course.thumbnail.url}}" alt="">
+          <div class="box-element product">
+            <h4 class="text-center" ><strong>{{course.name}}</strong></h4>
+            <h6 class="text-muted">Autor: {{course.author}}</h6>
             <hr>
-            <p class="card-text">Publicado hace {{course.publish_date|timesince}}</p>
+            <!-- IDEA: agregar logica de si ya esta comprado que no se pueda volver a agregar al carrito
+            {% if in_cart %}
+            <button data-action="add" class="btn btn-outline-secondary add-btn update-cart">Ya adquirido</button>
+            {% else %}
+            <a href="{% url 'cart_app:add-to-cart' course.slug %}">
+              <button data-action="add" class="btn btn-outline-secondary add-btn update-cart">Agregar al carrito</button>
+            </a>
+            {% endif %}
+             -->
+            <a class='btn btn-outline-success btn-block btn-primary text-light' href="{{course.get_absolute_url}}">Ver</a>
+              <div class="row pull-right p-2">
+                <p><strong>Precio: </strong></p>
+                <p>${{course.price}}</p>
+              </div>
+              <hr>
+              <p class="card-text">Publicado hace {{course.publish_date|timesince}}</p>
+          </div>
         </div>
+        {% endfor %}
       </div>
-      {% endfor %}
-
-
   </div>
-</section>
+</div>
+</div>
 
 
 {% endblock %}
