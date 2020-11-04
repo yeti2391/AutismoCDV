@@ -6,6 +6,34 @@
 
 {% block content %}
 
+<!-- IDEA: agregar carusel -->
+<div class="container p-3">
+  <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-interval="10000">
+        <img src="{% static 'img/equipo3.png' %}" class="d-block w-100" alt="frase juan II">
+      </div>
+      <div class="carousel-item" data-interval="2000">
+        <img src="{% static 'img/equipo2.png' %}" class="d-block w-100 img-fluid" alt="..." style="width: 100%; height: 100%; ">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'img/equipo.png' %}" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Anterior</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Siguiente</span>
+    </a>
+  </div>
+</div>
+
+
+<!-- IDEA: hasta aca carusel -->
+
 <main role="main">
   <section class="page-section clearfix">
     <div class="container">
@@ -18,7 +46,7 @@
           </h2>
 
           <div class="intro-button mx-auto">
-            <a class="btn btn-primary btn-xl" href="{% url 'core_app:inicio' %}">Ir a inicio</a>        
+            <a class="btn btn-primary btn-xl" href="{% url 'core_app:inicio' %}">Página de inicio</a>
           </div>
         </div>
       </div>
