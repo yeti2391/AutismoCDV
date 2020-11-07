@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'apps.content',
     'user',
     'apps.shopping_cart',
+    'apps.newcart',
 
 ]
 
